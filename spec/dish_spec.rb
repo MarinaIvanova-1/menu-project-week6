@@ -1,17 +1,19 @@
 require 'dish'
 
 RSpec.describe Dish do
-  it "returns the name of the dish and its price" do
-    new_dish = Dish.new("pasta", 10.00)
-    expect(new_dish.dish_name).to eq "pasta"
-    expect(new_dish.price).to eq 10.00
+  it "shows the name, price and time it takes to prepare a dish" do
+    dish_1 = Dish.new("pasta", "10", "15")
+    expect(dish_1.dish_name).to eq "pasta"
+    expect(dish_1.price).to eq "10"
+    expect(dish_1.time).to eq "15"
   end
 
-  it "adds the category to the dish" do
-    io = double :io
-    expect(io).to receive(:puts).with("pasta - 10.00, category: main")
-    new_dish = Dish.new("pasta", 10.00)
-    new_dish.category("main")
-    new_dish.show(io)
+  it "allows to select the dishes" do
+    dish_1 = Dish.new("pasta", "10")
+    dish_2 = Dish.new("salad", "5")
+    dish_1.select
+    expect(dish_1.selected?).to be_truthy
+    expect(dish_2.selected?).to be_falsy
   end
+
 end

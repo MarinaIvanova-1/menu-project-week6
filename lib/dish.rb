@@ -1,9 +1,9 @@
-# Dish = Struct.new(:dish_name, :price)
-
 class Dish
-  def initialize(dish_name, price)
+  def initialize(dish_name, price, time = 15)
     @dish_name = dish_name
     @price = price
+    @time = time
+    @selected = false
   end
 
   def dish_name
@@ -14,12 +14,20 @@ class Dish
     @price
   end
 
-  def category(type)
-    @type = type.to_sym
+  def time
+    @time
   end
 
-  def show(io = Kernel)
-    @io = io
-    @io.puts "#{@dish_name} - #{sprintf('%.2f', @price)}, category: #{@type}"
+  def select
+    @selected = true
   end
+
+  def unselect
+    @selected = false
+  end
+
+  def selected?
+    true if @selected == true
+  end
+
 end
