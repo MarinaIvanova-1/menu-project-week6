@@ -1,5 +1,5 @@
-require 'menu'
-require 'dish'
+require_relative 'menu'
+require_relative 'dish'
 
 class Order
   def initialize(menu, io = Kernel)
@@ -41,6 +41,16 @@ class Order
       @io.puts "#{dish.dish_name} - #{quantity}"
     end
     @io.puts "Total to pay: #{@total}"    
+  end
+
+  def time_to_prepare
+    @time = 0
+    @order.each do |dish|
+      if dish.time > @time
+        @time = dish.time
+      end
+    end
+    @time
   end
 end
 

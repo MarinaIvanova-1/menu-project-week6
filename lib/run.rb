@@ -1,11 +1,8 @@
-require './lib/menu.rb'
-require './lib/dish.rb'
-
 class ProgramMenu
-  def initialize(menu, io = Kernel)
-    @menu = menu
+  def initialize(io = Kernel)
     @io = io
   end
+
   def interactive_menu
     loop do
       print_options
@@ -24,20 +21,17 @@ class ProgramMenu
   def process(selection)
     case selection
       when "1"
-        @menu.show
+        #show menu
       when "2"
-        # order.Input
+        # order
       when "3"
         # receipt
       when "4"
         # text
       when "9"
-        exit
+        return
       else
         puts "I don't know what you meant, please try again"
     end
   end
 end
-  
-# new_order = ProgramMenu.new
-# new_order.interactive_menu

@@ -67,4 +67,13 @@ RSpec.describe Order do
     my_order.receipt
   end
 
+  it "calculates required time to prepare an order" do
+    dish_1 = double :dish, time: 20, selected?: true
+    dish_2 = double :dish, time: 5, selected?: true
+    menu = double :menu, list: [dish_1, dish_2]
+    my_order = Order.new(menu)
+    my_order.selected
+    expect(my_order.time_to_prepare).to eq 20
+  end
+
 end

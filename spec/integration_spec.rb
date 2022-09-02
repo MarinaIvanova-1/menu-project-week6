@@ -1,8 +1,22 @@
 require 'dish'
 require 'menu'
 require 'order'
+require 'menu_formatter'
 
 RSpec.describe "integration" do
+  it "formats the menu in a nice way" do
+    io = double :io
+    expect(io).to receive(:puts).with("1. Pasta - 10.00")
+    expect(io).to receive(:puts).with("2. Salad - 5.00")
+    my_menu = Menu.new
+    dish_1 = Dish.new("pasta", 10)
+    dish_2 = Dish.new("salad", 5)
+    my_menu.add(dish_1)
+    my_menu.add(dish_2)
+    menu_formatter = MenuFormatter.new(my_menu, io)
+    menu_formatter.show
+  end
+
   it "adds the dishes to the menu and shows them in a nicely formatted list" do
     dish_1 = Dish.new("pasta", "10")
     dish_2 = Dish.new("salad", "5")
@@ -49,5 +63,8 @@ RSpec.describe "integration" do
     my_order.quantity
     my_order.total
     my_order.receipt
+  end
+
+  it "send a text message with estimated time of delivery" do
   end
 end
